@@ -1,23 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import styled from 'styled-components/native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
-});
+import { Container, Row } from './src/components';
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   state = {
-    placeName: 'type here',
+    placeName: '',
+    places: [],
   };
 
   placeNameChangedHandler = placeName => {
@@ -25,31 +14,46 @@ export default class App extends Component<Props> {
     this.setState({ placeName });
   };
 
+  placeSubmitHandler = () => {
+    if (this.state.placeName.trim() === '') {
+      return;
+    }
+
+    this.setState(currentState => {
+      return {
+        places: currentState.places.concat(currentState.placeName),
+      };
+    });
+  };
+
   render() {
+    const placesOutput = this.state.places.map((place, index) => (
+      <StyledText key={index}>{place}</StyledText>
+    ));
+
     return (
-      <View style={styles.container}>
-        <Text>Type something</Text>
-        <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} onChangeText={this.placeNameChangedHandler} value={this.state.placeName} />
-      </View>
+      <Container>
+        <Row>
+          <Input
+            onChangeText={this.placeNameChangedHandler}
+            value={this.state.placeName}
+            placeholder="type here"
+          />
+          <StyledButton title="Add" onPress={this.placeSubmitHandler} />
+        </Row>
+        {placesOutput}
+        <Row />
+      </Container>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const Input = styled.TextInput`
+  width: 70%;
+`;
+
+const StyledButton = styled.Button`
+  width: 30%;
+`;
+
+const StyledText = styled.Text``;
