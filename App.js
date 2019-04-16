@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components/native';
-
-import { Container, Row } from './src/components';
+import { StyleSheet, TextInput, View } from 'react-native';
 
 export default class App extends Component {
   state = {
@@ -27,33 +25,25 @@ export default class App extends Component {
   };
 
   render() {
-    const placesOutput = this.state.places.map((place, index) => (
-      <StyledText key={index}>{place}</StyledText>
-    ));
-
     return (
-      <Container>
-        <Row>
-          <Input
-            onChangeText={this.placeNameChangedHandler}
-            value={this.state.placeName}
-            placeholder="type here"
-          />
-          <StyledButton title="Add" onPress={this.placeSubmitHandler} />
-        </Row>
-        {placesOutput}
-        <Row />
-      </Container>
+      <View style={styles.container}>
+        <TextInput
+          style={{ width: 300 }}
+          placeholder="An awesome place"
+          value={this.state.placeName}
+          onChangeText={this.placeNameChangedHandler}
+        />
+      </View>
     );
   }
 }
 
-const Input = styled.TextInput`
-  width: 70%;
-`;
-
-const StyledButton = styled.Button`
-  width: 30%;
-`;
-
-const StyledText = styled.Text``;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 26,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+});
