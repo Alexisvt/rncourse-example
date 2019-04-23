@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { ListItem, PlaceInput, PlaceList } from './src/components';
+import { PlaceInput, PlaceList } from './src/components';
 
 export default class App extends Component {
   state = {
@@ -25,11 +25,12 @@ export default class App extends Component {
     });
   };
 
-  render() {
-    const placesOutput = this.state.places.map((place, index) => (
-      <ListItem placeName={place} key={index} />
-    ));
+  onItemDeleted = (itemIndex = 0) => {
+    const places = this.state.places.filter((p, index) => index !== itemIndex);
+    this.setState({ places });
+  };
 
+  render() {
     return (
       <View style={styles.container}>
         <PlaceInput
@@ -37,7 +38,7 @@ export default class App extends Component {
           placeSubmitHandler={this.placeSubmitHandler}
           placeName={this.state.placeName}
         />
-        <PlaceList placesOutput={placesOutput} />
+        <PlaceList onItemDeleted={this.onItemDeleted} places={this.state.places} />
       </View>
     );
   }
