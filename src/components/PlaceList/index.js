@@ -11,7 +11,8 @@ export const PlaceList = ({ places = [], onItemDeleted }) => {
       data={places}
       renderItem={({ item }) => (
         <ListItem
-          placeName={item.value}
+          placeName={item.name}
+          placeImage={item.image}
           onItemPressed={() => {
             onItemDeleted(item.key);
           }}
