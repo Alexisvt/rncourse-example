@@ -1,24 +1,28 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 
 import { ListItem } from '../ListItem';
 
 export const PlaceList = ({ places = [], onItemDeleted }) => {
-  const placesOutput = places.map((place, index) => (
-    <ListItem
-      placeName={place}
-      key={index}
-      onItemPressed={() => {
-        onItemDeleted(index);
-      }}
+  return (
+    <FlatList
+      style={styles.listContainer}
+      data={places}
+      renderItem={({ item }) => (
+        <ListItem
+          placeName={item.value}
+          onItemPressed={() => {
+            onItemDeleted(item.key);
+          }}
+        />
+      )}
     />
-  ));
-  return <View style={styles.listContainer}>{placesOutput}</View>;
+  );
 };
 
 PlaceList.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.string).isRequired,
+  places: PropTypes.arrayOf(PropTypes.object).isRequired,
   onItemDeleted: PropTypes.func.isRequired,
 };
 

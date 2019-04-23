@@ -20,14 +20,17 @@ export default class App extends Component {
 
     this.setState(currentState => {
       return {
-        places: currentState.places.concat(currentState.placeName),
+        places: currentState.places.concat({
+          key: Math.random().toString(),
+          value: currentState.placeName,
+        }),
       };
     });
   };
 
-  onItemDeleted = (itemIndex = 0) => {
+  onItemDeleted = key => {
     this.setState(currentState => {
-      const places = currentState.places.filter((p, index) => index !== itemIndex);
+      const places = currentState.places.filter(p => p.key !== key);
       return { places };
     });
   };
