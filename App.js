@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default class App extends Component {
   state = {
@@ -25,6 +25,8 @@ export default class App extends Component {
   };
 
   render() {
+    const placesOutput = this.state.places.map((place, index) => <Text key={index}>{place}</Text>);
+
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -34,8 +36,9 @@ export default class App extends Component {
             value={this.state.placeName}
             onChangeText={this.placeNameChangedHandler}
           />
-          <Button title="Add" style={styles.placeButton} />
+          <Button onPress={this.placeSubmitHandler} title="Add" />
         </View>
+        <View>{placesOutput}</View>
       </View>
     );
   }
