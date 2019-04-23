@@ -26,8 +26,10 @@ export default class App extends Component {
   };
 
   onItemDeleted = (itemIndex = 0) => {
-    const places = this.state.places.filter((p, index) => index !== itemIndex);
-    this.setState({ places });
+    this.setState(currentState => {
+      const places = currentState.places.filter((p, index) => index !== itemIndex);
+      return { places };
+    });
   };
 
   render() {
