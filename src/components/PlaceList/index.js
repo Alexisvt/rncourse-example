@@ -4,7 +4,7 @@ import { FlatList, StyleSheet } from 'react-native';
 
 import { ListItem } from '../ListItem';
 
-export const PlaceList = ({ places = [], onItemDeleted }) => {
+export const PlaceList = ({ places = [], onItemSelected }) => {
   return (
     <FlatList
       style={styles.listContainer}
@@ -14,7 +14,7 @@ export const PlaceList = ({ places = [], onItemDeleted }) => {
           placeName={item.name}
           placeImage={item.image}
           onItemPressed={() => {
-            onItemDeleted(item.key);
+            onItemSelected(item.key);
           }}
         />
       )}
@@ -24,7 +24,7 @@ export const PlaceList = ({ places = [], onItemDeleted }) => {
 
 PlaceList.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onItemDeleted: PropTypes.func.isRequired,
+  onItemSelected: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
