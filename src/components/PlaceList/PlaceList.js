@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 
-import { ListItem } from '../ListItem';
+import { ListItem } from '../ListItem/ListItem';
 
 export const PlaceList = ({ places = [], onItemSelected }) => {
   return (

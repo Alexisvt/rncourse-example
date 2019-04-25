@@ -1,9 +1,9 @@
-import './actionTypes.js';
+import {ADD_PLACE, DELETE_PLACE, DESELECT_PLACE, SELECT_PLACE} from './actionTypes';
 
 export const addPlace = placeName => {
   return {
     type: ADD_PLACE,
-    payload: placeName,
+    placeName,
   };
 };
 
@@ -20,7 +20,7 @@ export const selectPlace = key => {
   };
 };
 
-export const deselectPlace = key => {
+export const deselectPlace = () => {
   return {
     type: DESELECT_PLACE,
   };
