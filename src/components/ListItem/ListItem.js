@@ -13,17 +13,17 @@ export const ListItem = ({ onItemPressed, placeName, placeImage }) => (
 
 const styles = StyleSheet.create({
   listItem: {
-    width: '100%',
-    padding: 10,
-    backgroundColor: '#eee',
-    margin: 5,
-    flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#eee',
+    flexDirection: 'row',
+    margin: 5,
+    padding: 10,
+    width: '100%',
   },
   placeImage: {
+    height: 30,
     marginRight: 8,
     width: 30,
-    height: 30,
   },
 });
 

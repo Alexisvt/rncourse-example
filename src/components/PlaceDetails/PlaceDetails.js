@@ -19,7 +19,6 @@ export const PlaceDetail = ({ name, image, onItemDeleted, onModalClosed }) => (
   </Modal>
 );
 PlaceDetail.propTypes = {
-  key: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.object.isRequired,
   onItemDeleted: PropTypes.func.isRequired,
@@ -31,12 +30,12 @@ const styles = StyleSheet.create({
     margin: 22,
   },
   placeImage: {
-    width: '100%',
     height: 200,
+    width: '100%',
   },
   placeName: {
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 28,
   },
 });
