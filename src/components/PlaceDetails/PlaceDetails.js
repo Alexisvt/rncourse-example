@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Image, Modal, StyleSheet, Text, View } from 'react-native';
+import { Button, Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export const PlaceDetail = ({ name, image, onItemDeleted, onModalClosed }) => (
   <Modal visible={!!(name && image)} onRequestClose={onModalClosed}>
@@ -12,7 +13,11 @@ export const PlaceDetail = ({ name, image, onItemDeleted, onModalClosed }) => (
         </View>
       )}
       <View>
-        <Button title="Delete" color="red" onPress={onItemDeleted} />
+        <TouchableOpacity onPress={onItemDeleted}>
+          <View style={styles.deleteButton}>
+            <Icon name="ios-trash" size={30} color="red" />
+          </View>
+        </TouchableOpacity>
         <Button title="Close" onPress={onModalClosed} />
       </View>
     </View>
@@ -26,6 +31,9 @@ PlaceDetail.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  deleteButton: {
+    alignItems: 'center',
+  },
   modalContainer: {
     margin: 22,
   },
