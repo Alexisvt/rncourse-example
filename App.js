@@ -1,25 +1,22 @@
-import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
 
-
-import {PlaceDetail, PlaceInput, PlaceList} from './src/components';
-import {addPlace, deletePlace, selectPlace, deselectPlace} from './src/store/actions';
-
+import { PlaceDetail, PlaceInput, PlaceList } from './src/components';
+import { addPlace, deletePlace, deselectPlace, selectPlace } from './src/store/actions';
 
 class App extends Component {
-
   state = {
-    placeName: ''
+    placeName: '',
   };
 
   placeNameChangedHandler = placeName => {
-    this.setState((prevState) => {
-      return {placeName};
+    this.setState(prevState => {
+      return { placeName };
     });
   };
 
-  placeAddedHandler = (placeName) => {
+  placeAddedHandler = placeName => {
     if (this.state.placeName.trim() === '') {
       return;
     }
@@ -52,7 +49,7 @@ class App extends Component {
           onPlaceAdded={this.placeAddedHandler}
           placeName={this.state.placeName}
         />
-        <PlaceList onItemSelected={this.placeSelectedHandler} places={this.props.places}/>
+        <PlaceList onItemSelected={this.placeSelectedHandler} places={this.props.places} />
       </View>
     );
   }
@@ -60,14 +57,11 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 26,
-    backgroundColor: '#fff',
     alignItems: 'center',
+    backgroundColor: '#fff',
+    flex: 1,
     justifyContent: 'flex-start',
-  },
-  placeButton: {
-    width: '30%',
+    padding: 26,
   },
 });
 
@@ -80,11 +74,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddPlace: (name) => dispatch(addPlace(name)),
+    onAddPlace: name => dispatch(addPlace(name)),
     onDeletePlace: () => dispatch(deletePlace()),
-    onSelectPlace: (key) => dispatch(selectPlace(key)),
-    onDeselectPlace: () => dispatch(deselectPlace())
+    onSelectPlace: key => dispatch(selectPlace(key)),
+    onDeselectPlace: () => dispatch(deselectPlace()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
