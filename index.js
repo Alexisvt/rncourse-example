@@ -1,22 +1,28 @@
-/**
- * @format
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
+import { Navigation } from 'react-native-navigation';
 
-import React from 'react';
+import { registerScreens } from './screens';
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
-import {Provider} from 'react-redux';
-import configureStore from './src/store/configureStore';
+registerScreens();
 
-const store = configureStore();
-
-const RNRedux = () => (
-  <Provider store={store}>
-    <App/>
-  </Provider>
-);
-
-AppRegistry.registerComponent(appName, () => RNRedux);
+Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setRoot({
+    root: {
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'navigation.App',
+            },
+          },
+        ],
+        options: {
+          topBar: {
+            title: {
+              text: 'Blog',
+            },
+          },
+        },
+      },
+    },
+  });
+});
