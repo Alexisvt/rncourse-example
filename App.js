@@ -9,23 +9,25 @@ Navigation.registerComponent('awesome-places.AuthScreen', () => AuthScreen);
 Navigation.registerComponent('awesome-places.FindPlaceScreen', () => FindPlaceScreen);
 Navigation.registerComponent('awesome-places.SharedPlaceScreen', () => SharedPlaceScreen);
 
-Navigation.setRoot({
-  root: {
-    stack: {
-      children: [
-        {
-          component: {
-            name: 'awesome-places.AuthScreen',
+Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setRoot({
+    root: {
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'awesome-places.AuthScreen',
+            },
           },
-        },
-      ],
-      options: {
-        topBar: {
-          title: {
-            text: 'Login',
+        ],
+        options: {
+          topBar: {
+            title: {
+              text: 'Login',
+            },
           },
         },
       },
     },
-  },
+  });
 });
