@@ -1,33 +1,36 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Button, StyleSheet, TextInput, View} from 'react-native';
+import { Button, StyleSheet, TextInput, View } from 'react-native';
 
-export const PlaceInput = ({placeName, placeNameChangedHandler, onPlaceAdded}) => (
+export const PlaceInput = ({ placeName, placeNameChanged, onPlaceAdded }) => (
   <View style={styles.inputContainer}>
     <TextInput
       style={styles.placeInput}
       placeholder="An awesome place"
       value={placeName}
-      onChangeText={placeNameChangedHandler}
+      onChangeText={placeNameChanged}
     />
-    <Button onPress={() => {
-      onPlaceAdded(placeName);
-    }} title="Add"/>
+    <Button
+      onPress={() => {
+        onPlaceAdded(placeName);
+      }}
+      title="Add"
+    />
   </View>
 );
 
 PlaceInput.propTypes = {
   placeName: PropTypes.string.isRequired,
-  placeNameChangedHandler: PropTypes.func.isRequired,
+  placeNameChanged: PropTypes.func.isRequired,
   onPlaceAdded: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: '100%',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    width: '100%',
   },
   placeInput: {
     width: '70%',

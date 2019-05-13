@@ -1,14 +1,48 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+
+import { PlaceInput } from '../components';
+import { addPlace } from '../store/actions';
 
 class SharedPlaceScreen extends Component {
+  state = {
+    placeName: '',
+  };
+
+  static propTypes = {
+    onAddPlace: PropTypes.func.isRequired,
+  };
+
+  placeNameChangeHandler = placeName => {
+    this.setState(() => ({
+      placeName,
+    }));
+  };
+
+  placeAddedHandler = placeName => {
+    this.props.onAddPlace(placeName);
+  };
+
   render() {
     return (
       <View>
-        <Text>On SharedPlaceScreen</Text>
+        <PlaceInput
+          placeName={this.state.placeName}
+          placeNameChanged={this.placeNameChangeHandler}
+          onPlaceAdded={this.placeAddedHandler}
+        />
       </View>
     );
   }
 }
 
-export default SharedPlaceScreen;
+const mapDispatchToProps = dispatch => ({
+  onAddPlace: placeName => dispatch(addPlace(placeName)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SharedPlaceScreen);
